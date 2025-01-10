@@ -9,12 +9,12 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            background: #E8E5D9;
         }
 
         body {
             margin: 0;
             padding: 20px;
-            background: #E8E5D9;
             min-height: 100vh;
             font-family: Arial, sans-serif;
         }
@@ -22,13 +22,11 @@
         #container {
             display: grid;
             gap: 20px;
-            width: calc(100% + 1px);
-            height: calc(100vh - 40px + 1px);
-            margin: -0.5px;
+            width: 100%;
+            height: calc(100vh - 40px);
         }
 
         .iframe-wrapper {
-            background: white;
             border-radius: 8px;
             overflow: hidden;
             position: relative;
