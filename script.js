@@ -1,7 +1,43 @@
 const BASE_URL = 'https://generator.base.artblocks.io/0x0000000080d04343d60d06e1a36aaf46c9242805/';
 
+const PROJECT_LIMITS = {
+    0: 1500,
+    1: 1000,
+    2: 2500
+};
+
+function getRandomTokenId(projectId) {
+    const maxMints = PROJECT_LIMITS[projectId];
+    const baseOffset = projectId * 1000000;
+    return baseOffset + Math.floor(Math.random() * maxMints);
+}
+
+function getRandomTokens(projectChoice, count) {
+    const tokens = [];
+    const possibleProjects = projectChoice === 'any' 
+        ? Object.keys(PROJECT_LIMITS) 
+        : [projectChoice.toString()];
+
+    for (let i = 0; i < count; i++) {
+        const randomProject = possibleProjects[Math.floor(Math.random() * possibleProjects.length)];
+        tokens.push(getRandomTokenId(parseInt(randomProject)));
+    }
+    
+    return tokens;
+}
+
 function getTokenIdsFromUrl() {
     const params = new URLSearchParams(window.location.search);
+    
+    // Check for random parameter
+    const randomProject = params.get('random');
+    const count = parseInt(params.get('count')) || 1;
+
+    if (randomProject !== null) {
+        return getRandomTokens(randomProject, count);
+    }
+
+    // Fall back to specific tokens if provided
     const tokens = params.get('tokens');
     return tokens ? tokens.split(',').map(t => t.trim()) : [];
 }
