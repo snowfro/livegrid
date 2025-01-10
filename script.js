@@ -43,16 +43,35 @@ function getTokenIdsFromUrl() {
 }
 
 function calculateLayout(count) {
+    // Handle special cases for small numbers
     if (count === 1) return { cols: 1, rows: 1 };
     if (count === 2) return { cols: 2, rows: 1 };
     if (count === 3) return { cols: 3, rows: 1 };
     if (count === 4) return { cols: 2, rows: 2 };
     if (count === 5) return { cols: 5, rows: 1 };
     if (count === 6) return { cols: 3, rows: 2 };
-    
-    // For more than 6, create a balanced grid
-    const cols = Math.ceil(Math.sqrt(count));
-    const rows = Math.ceil(count / cols);
+
+    // For larger numbers, try to find the most even distribution
+    // Start with the square root and adjust up or down to find the best fit
+    const sqrt = Math.sqrt(count);
+    let cols = Math.ceil(sqrt);
+    let rows = Math.ceil(count / cols);
+
+    // Try to make it more even by checking if increasing columns reduces empty spaces
+    const currentEmptySpaces = (cols * rows) - count;
+    const withOneMoreCol = Math.ceil(count / (cols + 1)) * (cols + 1) - count;
+
+    if (withOneMoreCol < currentEmptySpaces) {
+        cols++;
+        rows = Math.ceil(count / cols);
+    }
+
+    // If we have a very wide grid, try to make it more balanced
+    if (cols > 2 * rows) {
+        cols = Math.ceil(count / Math.ceil(sqrt));
+        rows = Math.ceil(count / cols);
+    }
+
     return { cols, rows };
 }
 
