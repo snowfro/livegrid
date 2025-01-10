@@ -1,4 +1,4 @@
-# LiveGrid
+# Generative Goods Grid View
 
 A simple web application for viewing multiple Art Blocks pieces in a responsive grid layout. The application automatically adjusts the layout based on the number of pieces being displayed.
 
