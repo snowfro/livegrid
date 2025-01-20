@@ -91,7 +91,7 @@ function createIframes(tokenIds) {
         const tooltip = document.createElement('div');
         tooltip.className = 'artwork-tooltip';
         const artworkId = parseInt(tokenId) % 1000000;
-        tooltip.textContent = `Artwork #${artworkId}`;
+        tooltip.textContent = artworkId;
         
         const iframe = document.createElement('iframe');
         iframe.src = BASE_URL + tokenId;
