@@ -42,6 +42,28 @@
             height: 100%;
             border: none;
         }
+
+        /* Tooltip styles */
+        .artwork-tooltip {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7) !important;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Only show tooltip on desktop hover */
+        @media (hover: hover) and (min-width: 768px) {
+            .iframe-wrapper:hover .artwork-tooltip {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
