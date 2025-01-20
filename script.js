@@ -3,7 +3,8 @@ const BASE_URL = 'https://generator.base.artblocks.io/0x0000000080d04343d60d06e1
 const PROJECT_LIMITS = {
     0: 1500,
     1: 1000,
-    2: 2500
+    2: 2500,
+    3: 1600
 };
 
 function getRandomTokenId(projectId) {
